@@ -1,0 +1,27 @@
+package user
+
+import (
+    "goTempl/view/layout"
+    "goTempl/model"
+    "goTempl/view/components"
+)
+
+func getUser(c context.Context) string {
+  user, ok := c.Value("user").(string)
+  if !ok {
+    return ""
+  }
+  return user
+}
+
+
+templ Show(u model.User) {
+  <h1>
+    {getUser(ctx)}
+  </h1>
+  @layout.Base() {
+    
+  <h1>Hello {u.Email} from the user view</h1>
+  @components.Input("email", "email")
+  }
+}
